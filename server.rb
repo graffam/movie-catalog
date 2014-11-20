@@ -17,13 +17,22 @@ end
 # end
 #[{:id=>"2", :title=>"Troll 2", :year=>"1990", :synopsis=>"", :rating=>"0", :genre=>"Horror", :studio=>"MGM"},
 
+
 get '/movies?' do
+
+  @search = params[:query]
   params[:page].to_i < 1 ? @page_num = 1 : @page_num = params[:page].to_i
   @start = (@page_num - 1) * 20
   @end_array = (@page_num * 20)
   @movies = get_movies
+  if @search != nil
+    @search.downcase
+    @movies = @movies.find_all do |movie|
+      /#{@search.downcase}/.match(movie[:title].downcase) || ((movie[:synopsis] != nil) && /\s#{@search.downcase}\s/.match(movie[:synopsis].downcase))
+    end
+  end
   @movies.sort_by! {|index| index[:title]}
-  @movies = @movies.slice(@start..@end_array)
+  @movies = @movies.slice(@start...@end_array)
   erb :index
 end
 
