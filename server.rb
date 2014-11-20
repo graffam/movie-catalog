@@ -17,9 +17,16 @@ end
 # end
 #[{:id=>"2", :title=>"Troll 2", :year=>"1990", :synopsis=>"", :rating=>"0", :genre=>"Horror", :studio=>"MGM"},
 
-get '/movies' do
+get '/movies?:page' do
+  @page_num = params[:page].to_i
+    if params[:page] == "s"
+      @page_num = 1
+    end
+  @start = (@page_num - 1) * 20
+  @end_array = (@page_num * 20)
   @movies = get_movies
   @movies.sort_by! {|index| index[:title]}
+  @movies = @movies.slice(@start..@end_array)
   erb :index
 end
 
