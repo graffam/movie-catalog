@@ -1,0 +1,18 @@
+<!DOCTYPE.html>
+<html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1><%=@selected_movie[:title]%></h1>
+    <ul>
+      <li>Year Released: <%=@selected_movie[:year]%> </li>
+
+      <li>Rating: <%= @selected_movie[:rating] %> </li>
+      <li>Genre: <%= @selected_movie[:genre] %> </li>
+      <li>Studio: <%= @selected_movie[:studio] %> </li>
+    </ul>
+
+      <p>Synopsis: <%= @selected_movie[:synopsis] %></p>
+  </body>
+</html>
