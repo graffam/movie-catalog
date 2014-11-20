@@ -9,6 +9,6 @@
         <li><a href = "/movies/<%=movie[:id]%>"> <%="#{movie[:title]}"%></a></li>
       <%end%>
     </ul>
-   <a href="/movie?page=<%= @page_num - 1%>">Back</a> <a href="/movie<%= @page_num + 1%>">Next</a>
+   <a href="/movie?page=<%= @page_num - 1%>">Back</a> <a href="/movie?page=<%= @page_num + 1%>">Next</a>
   </body>
 </html>
